@@ -12,5 +12,5 @@ export interface IUser {
         Age?:Number,
         profile_image?:String,
         confirmEmail?:Boolean,.
-        gender?:gender
+        gender?:gender.female.
     }
