@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
 import { gender } from "../common/enum/gender.enum.js";
 import { role } from "../common/enum/role.enum.js";
+import { IUser } from "../common/enum/Interface/user.interface.js";
 
 const noInfo = "!no data enter";
 
@@ -93,5 +94,5 @@ userschema.virtual("fullname").get(function () {
   return `${this.First_Name} ${this.Last_Name}`;
 });
 
-const userModel = model("User", userschema);
+const userModel = model<IUser>("User", userschema);
 export default userModel;
