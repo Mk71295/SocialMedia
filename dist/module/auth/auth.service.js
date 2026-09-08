@@ -15,17 +15,18 @@ class AuthService {
     }
     async registration(info) {
         const user = await user_Model_1.default.create(info);
-        return { message: "Registration successful" };
+        return user;
     }
     async getprofile(userID) {
         const user = await user_Model_1.default.findById(userID);
         if (!user) {
-            return { message: "User not found" };
+            throw new Error("User not found");
         }
-        return { message: "Profile retrieved successfully" };
+        return user;
     }
     async getAllUsers() {
         const users = await user_Model_1.default.find();
-        return { message: "Users retrieved successfully" };
+        return users;
     }
 }
+exports.default = new AuthService(); //one copy of class

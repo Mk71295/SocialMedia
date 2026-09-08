@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const gender_enum_js_1 = require("../common/enum/gender.enum.js");
-const role_enum_js_1 = require("../common/enum/role.enum.js");
+const gender_enum_1 = require("../common/enum/gender.enum");
+const role_enum_1 = require("../common/enum/role.enum");
 const noInfo = "!no data enter";
 const userschema = new mongoose_1.Schema({
     First_Name: {
@@ -24,24 +24,24 @@ const userschema = new mongoose_1.Schema({
         trim: true,
         minlength: 3,
         maxlength: 50,
-        required: true,
+        required: false, // 💡 تصحيح required
         unique: true
     },
-    Email: {
+    email: {
         type: String,
         trim: true,
         required: true,
         unique: true,
         lowercase: true // 💡 يفضل تحويل الإيميل لسمول دائماً
     },
-    Password: {
+    password: {
         type: String,
         trim: true,
         minlength: 6,
         required: true
         // 💡 تم إزالة maxlength لتجنب مشاكل الـ Hashing
     },
-    Address: {
+    address: {
         type: String,
         trim: true,
         default: noInfo
@@ -52,7 +52,7 @@ const userschema = new mongoose_1.Schema({
         maxlength: 11,
         required: true
     },
-    Age: {
+    age: {
         type: Number,
         min: 10,
         max: 100
@@ -67,13 +67,13 @@ const userschema = new mongoose_1.Schema({
     },
     gender: {
         type: String,
-        enum: Object.values(gender_enum_js_1.gender),
-        default: gender_enum_js_1.gender.male
+        enum: Object.values(gender_enum_1.gender),
+        default: gender_enum_1.gender.male
     },
-    Role: {
+    role: {
         type: String,
-        enum: Object.values(role_enum_js_1.role),
-        default: role_enum_js_1.role.USER // 💡 تصحيح default
+        enum: Object.values(role_enum_1.role),
+        default: role_enum_1.role.user // 💡 تصحيح default
     }
 }, {
     timestamps: true,

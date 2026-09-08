@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import { gender } from "../common/enum/gender.enum.js";
-import { role } from "../common/enum/role.enum.js";
-import { IUser } from "../common/enum/Interface/user.interface.js";
+import { gender } from "../common/enum/gender.enum";
+import { role } from "../common/enum/role.enum";
+import { IUser } from "../common/enum/Interface/user.interface";
 
 const noInfo = "!no data enter";
 
@@ -26,24 +26,24 @@ const userschema = new Schema(
       trim: true,
       minlength: 3,
       maxlength: 50,
-      required: true,
+      required: false, // 💡 تصحيح required
       unique: true
     },
-    Email: {
+    email: {
       type: String,
       trim: true,
       required: true,
       unique: true,
       lowercase: true // 💡 يفضل تحويل الإيميل لسمول دائماً
     },
-    Password: {
+    password: {
       type: String,
       trim: true,
       minlength: 6,
       required: true
       // 💡 تم إزالة maxlength لتجنب مشاكل الـ Hashing
     },
-    Address: {
+    address: {
       type: String,
       trim: true,
       default: noInfo
@@ -54,7 +54,7 @@ const userschema = new Schema(
       maxlength: 11,
       required: true
     },
-    Age: {
+    age: {
       type: Number,
       min: 10,
       max: 100
@@ -72,10 +72,10 @@ const userschema = new Schema(
       enum: Object.values(gender),
       default: gender.male
     },
-    Role: {
+    role: {
       type: String,
       enum: Object.values(role),
-      default: role.USER // 💡 تصحيح default
+      default: role.user // 💡 تصحيح default
     }
   },
   {

@@ -12,20 +12,21 @@ class AuthService{
     }
     return { message: "Login successful"};
     }
-   async registration(info: IUser): Promise<Ilogin> {
+   async registration(info: IUser): Promise<HydratedDocument<IUser>> {
     const user : HydratedDocument<IUser> = await userModel.create(info);
 
-    return { message: "Registration successful" };
+    return user;
 }
-async getprofile(userID:string):Promise<Ilogin>{
+async getprofile(userID:string):Promise<HydratedDocument<IUser>>{
     const user = await userModel.findById(userID);
     if(!user){
-        return { message: "User not found" };
+        throw new Error("User not found");
     }
-    return { message: "Profile retrieved successfully" };
+    return user;
 }
-async getAllUsers():Promise<Ilogin>{
+async getAllUsers():Promise<HydratedDocument<IUser>[]>{
     const users = await userModel.find();
-    return { message: "Users retrieved successfully" };
+    return users;
 }
 }
+export default new AuthService(); //one copy of class
